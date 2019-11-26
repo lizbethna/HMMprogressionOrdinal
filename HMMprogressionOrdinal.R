@@ -19,12 +19,8 @@
 ### Load the R libraries
 ##################################################
 library(rjags)
-#library(mnormt)
 library(MCMCpack) ### MCMC
-#library(LearnBayes) ### Bayes
-#library(gamlss.dist) ### Inverse Gaussian distribution
 ##################################################
-
 
 ##################################################
 ### ADDRESS
@@ -184,7 +180,6 @@ save( sample.ord, file=paste0("sample.ord.RData"))
   
 #load(file=paste0("sample.ord.RData"))
 #summary(sample.ord)
-  
   
 ##################################################
 
