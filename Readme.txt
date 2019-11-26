@@ -7,11 +7,11 @@ A hidden Markov model to address measurement errors in an ordinal response scale
 Authors:
 Lizbeth Naranjo (1), Luz Judith R. Esparza (2), Carlos J. Perez (3).
 
-(1) Departamento de Matemáticas, Facultad de Ciencias, Universidad Nacional Autónoma de México (UNAM), Mexico
+(1) Departamento de Matemáticas, Facultad de Ciencias, Universidad Nacional Autonoma de Mexico (UNAM), Mexico
 
-(2) Cátedra CONACyT - Universidad Autónoma de Aguascalientes, Mexico
+(2) Catedra CONACyT - Universidad Autonoma de Aguascalientes, Mexico
 
-(3) Departamento de Matemáticas, Facultad de Veterinaria, Universidad de Extremadura, Spain
+(3) Departamento de Matematicas, Facultad de Veterinaria, Universidad de Extremadura, Spain
 
 
 Journal:
