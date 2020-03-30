@@ -1,8 +1,9 @@
 /*
-A hidden Markov model to address measurement errors in an ordinal response scale and non-decreasing processes.
+A hidden Markov model to address measurement errors in ordinal response scale and non-decreasing process.
 
 Lizbeth Naranjo, Luz Judith R. Esparza, and Carlos J. Perez
 
+SIMULATE DATA
 */
  
 ### LIKELIHOOD

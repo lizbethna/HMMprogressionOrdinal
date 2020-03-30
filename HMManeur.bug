@@ -1,0 +1,66 @@
+/*
+A hidden Markov model to address measurement errors in ordinal response scale and non-decreasing process.
+
+Lizbeth Naranjo, Luz Judith R. Esparza, and Carlos J. Perez
+
+Aortic Aneurysm Progression Data
+*/
+ 
+
+model{
+
+### TRAINING
+	for(i in 1:N){		
+
+### First examination 
+		Wobs[i,1] ~ dnorm(0,1)	
+		Wtrue[i,1] ~ dnorm(0,1)		
+		
+### 2nd,3rd,...,Kth examination 
+		for(k in 2:Ki[i]){				
+
+			Yobs[i,k] ~ dinterval(Wobs[i,k],kappa[1:3])	
+			Wobs[i,k] ~ dnorm(Wtrue[i,k],Tau[Xi[i,k-1]])
+			Wtrue[i,k] ~ dnorm(ETA[i,k],1)T(Wtrue[i,k-1],)
+
+			ETA[i,k] <- X[i,k]*Beta 
+		}
+	} 
+
+### PREDICTION
+### First examination 
+	for(i in 1:Nnew){		
+
+		Wobsnew[i,1] ~ dnorm(0,1)	
+		Wtruenew[i,1] ~ dnorm(0,1)		
+		
+### 2nd,3rd,...,Kth examination 
+		for(k in 2:Kinew[i]){				
+
+			Wobsnew[i,k] ~ dnorm(Wtruenew[i,k],Tau[Xinew[i,k-1]])
+			Wtruenew[i,k] ~ dnorm(ETAnew[i,k],1)T(Wtruenew[i,k-1],)
+
+			ETAnew[i,k] <- Xnew[i,k]*Beta 
+		}
+	} 
+
+### PRIOR
+	Beta ~ dnorm(0.0,1.0E-4)
+
+	Tau[1] ~ dgamma(0.01,0.01)
+	Tau[2] ~ dgamma(0.01,0.01)
+	Tau[3] ~ dgamma(0.01,0.01)
+	Tau[4] ~ dgamma(0.01,0.01)
+	Sig2[1] <- 1/Tau[1] 
+  	Sig2[2] <- 1/Tau[2] 
+  	Sig2[3] <- 1/Tau[3] 
+  	Sig2[4] <- 1/Tau[4] 
+
+	gam[1] ~ dnorm(0.0,1.0E-4)
+	gam[2] ~ dnorm(0.0,1.0E-4)
+	gam[3] ~ dnorm(0.0,1.0E-4)
+	kappa0[1:3] <- sort(gam[1:3])
+	kappa <- kappa0-gam[1] 
+
+}
+

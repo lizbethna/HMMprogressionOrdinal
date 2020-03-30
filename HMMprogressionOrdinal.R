@@ -1,6 +1,6 @@
 ##################################################
 ### Paper:
-### A hidden Markov model to address measurement errors in an ordinal response scale and non-decreasing processes
+### A hidden Markov model to address measurement errors in ordinal response scale and non-decreasing process
 ###
 ### Authors:
 ### Lizbeth Naranjo (1), Luz Judith R. Esparza (2), Carlos J. Perez (3).
@@ -9,7 +9,7 @@
 ### (2) Catedra CONACyT - Universidad Autonoma de Aguascalientes, Mexico
 ### (3) Departamento de Matematicas, Facultad de Veterinaria, Universidad de Extremadura, Spain
 ### 
-### Journal:
+### Journal: Mathematics
 ### Submitted. Under Revision. 
 ##################################################
 
@@ -19,8 +19,12 @@
 ### Load the R libraries
 ##################################################
 library(rjags)
+#library(mnormt)
 library(MCMCpack) ### MCMC
+#library(LearnBayes) ### Bayes
+#library(gamlss.dist) ### Inverse Gaussian distribution
 ##################################################
+
 
 ##################################################
 ### ADDRESS
@@ -162,8 +166,8 @@ inits <- function(){	list(
   
 fit.ord <- jags.model("HMMprogressionOrdinal.bug", data, inits, n.chains=3)
   
-update(fit.ord,20000)
-sample.ord <- coda.samples(fit.ord, param, n.iter=20000, thin=10)
+update(fit.ord,2000)
+sample.ord <- coda.samples(fit.ord, param, n.iter=2000, thin=2)
   
 plot(sample.ord)
 summary(sample.ord)
@@ -173,13 +177,14 @@ post.ord <- summary(sample.ord)
 table1 <- cbind(post.ord$statistics[,1], post.ord$quantiles[,"50%"],
                 post.ord$statistics[,2], post.ord$quantiles[,c("2.5%","97.5%")])
 colnames(table1)[1:3] <- c("Mean", "Median", "SD") 
-write.table(table1, file=paste0("table.txt"), quote=FALSE, sep=";", row.names=TRUE)
+table1
+#write.table(table1, file=paste0("table.txt"), quote=FALSE, sep=";", row.names=TRUE)
 
 #typeof(sample.ord)
-save( sample.ord, file=paste0("sample.ord.RData"))
-  
+#save( sample.ord, file=paste0("sample.ord.RData"))
 #load(file=paste0("sample.ord.RData"))
 #summary(sample.ord)
+  
   
 ##################################################
 
